@@ -1,0 +1,82 @@
+% =============================================
+% Around the Table: Questions
+% =============================================
+\documentclass[a4paper,12pt,landscape]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=3cm,nofoot]{geometry} %,nofoot
+\usepackage{url}
+\usepackage{datatool}
+% =============================================
+% FONTSSTUFF ==================================
+\usepackage{microtype}
+  \microtypesetup{%
+    expansion=false,
+    % expansion=true,
+    % protrusion=true,auto=true,tracking=true,tracking=smallcaps
+  }
+% =============================================
+% FONTS =======================================
+% \usepackage{lmodern}
+\usepackage[default,oldstyle]{opensans} % scale=0.95
+% \usepackage[sfdefault]{FiraSans}
+%\usepackage[osf,sc]{mathpazo}%
+% \usepackage[osf]{libertine}
+% \usepackage[opticals,mathlf]{MinionPro}%
+% =============================================
+
+% =============================================
+% =============================================
+\begin{document}
+% =============================================
+\addtokomafont{pagenumber}{\huge}
+% =============================================
+\newcommand{\darksymbol}{$\clubsuit$}
+% =============================================
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+% =============================================
+\thispagestyle{empty}
+\raggedright
+Best to be printed with 6--8 cards on a single sheet of paper. 
+
+``\darksymbol'' marks questions IMHO to be avoided if you prefer a rather positive experience. 
+
+\bigskip
+
+Based on Nick Crocker's ``Around the Table -- 101 ways to kick off the best family dinner table game.''
+
+\url{https://medium.com/things-ive-written/around-the-table-ea8b520683c5}
+
+\bigskip
+
+LaTeX and website adaption by André Miede \url{https://github.com/amiede/aroundthetable}
+
+\clearpage
+% =============================================
+\pagenumbering{arabic}
+\pagestyle{plain}
+\fontsize{60}{70}\selectfont
+% =============================================
+\DTLsetseparator{;}
+\DTLloaddb{questions}{../aroundthetable_questions.csv}
+%\DTLdisplaydb{questions}
+% =============================================
+\DTLforeach{questions}{%
+	\question=Question,%
+	\dark=Dark,%
+	\qfont=Font%
+}{%
+	\DTLifstringeq*{\qfont}{--}{\fontsize{50}{60}\selectfont}{\relax}% starred version case-insensitive
+	\vspace*{\fill}%
+	% Mark "dark" entries on page (in .csv with "x")
+	\DTLifstringeq*{\dark}{x}{\darksymbol}{\relax}% starred version case-insensitive
+	\noindent\question%
+  \vspace*{\fill}%
+	\clearpage%
+}
+% =============================================
+\end{document}
