@@ -5,25 +5,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
-\usepackage[top=2cm, bottom=2cm, left=3cm, right=3cm,nofoot]{geometry} %,nofoot
-\usepackage{url}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=3cm, nofoot]{geometry} %,nofoot
+\usepackage{url}\urlstyle{same}
 \usepackage{datatool}
 % =============================================
 % FONTSSTUFF ==================================
-\usepackage{microtype}
-  \microtypesetup{%
-    expansion=false,
-    % expansion=true,
-    % protrusion=true,auto=true,tracking=true,tracking=smallcaps
-  }
-% =============================================
-% FONTS =======================================
+\usepackage[expansion=false]{microtype}
+\usepackage{amssymb}
 % \usepackage{lmodern}
-\usepackage[default,oldstyle]{opensans} % scale=0.95
-% \usepackage[sfdefault]{FiraSans}
+%\usepackage[default,oldstyle]{opensans} % scale=0.95
+\usepackage[sfdefault]{FiraSans}
 %\usepackage[osf,sc]{mathpazo}%
-% \usepackage[osf]{libertine}
-% \usepackage[opticals,mathlf]{MinionPro}%
+%\usepackage[osf]{libertine}
+%\usepackage[opticals,mathlf]{MinionPro}%
 % =============================================
 
 % =============================================
@@ -32,7 +26,8 @@
 % =============================================
 \addtokomafont{pagenumber}{\huge}
 % =============================================
-\newcommand{\darksymbol}{$\clubsuit$}
+%\newcommand{\darksymbol}{\raisebox{.5pt}{\normalsize\textcircled{\raisebox{-.9pt}{!}}}}
+\newcommand{\darksymbol}{$\blacksquare$}
 % =============================================
 \tolerance=1
 \emergencystretch=\maxdimen
@@ -59,7 +54,6 @@ LaTeX and website adaption by André Miede \url{https://github.com/amiede/around
 % =============================================
 \pagenumbering{arabic}
 \pagestyle{plain}
-\fontsize{60}{70}\selectfont
 % =============================================
 \DTLsetseparator{;}
 \DTLloaddb{questions}{../aroundthetable_questions.csv}
@@ -70,7 +64,8 @@ LaTeX and website adaption by André Miede \url{https://github.com/amiede/around
 	\dark=Dark,%
 	\qfont=Font%
 }{%
-	\DTLifstringeq*{\qfont}{--}{\fontsize{50}{60}\selectfont}{\relax}% starred version case-insensitive
+	% Allow to change the font size, e.g. for long questions
+	\DTLifstringeq*{\qfont}{--}{\fontsize{50}{60}\selectfont}{\fontsize{60}{70}\selectfont}% starred version case-insensitive
 	\vspace*{\fill}%
 	% Mark "dark" entries on page (in .csv with "x")
 	\DTLifstringeq*{\dark}{x}{\darksymbol}{\relax}% starred version case-insensitive
